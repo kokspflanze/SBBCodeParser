@@ -156,13 +156,13 @@ class Node_Container_Document extends Node_Container
 			}, BBCode::BLOCK_TAG),
 
 			new BBCode('paypal', function($content, $attribs)
-				{
-					$content = urlencode($content);
+			{
+				$content = urlencode($content);
 
-					return '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business='
-					. $content . '&lc=US&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest">
+				return '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business='
+				. $content . '&lc=US&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest">
 				<img src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/></a>';
-				},
+			},
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
 
 
@@ -720,7 +720,7 @@ class Node_Container_Document extends Node_Container
 					$bits        = preg_split('/([ =])/', trim($tag), 2, PREG_SPLIT_DELIM_CAPTURE);
 					$tag_attrs   = (isset($bits[2]) ? $bits[1] . $bits[2] : '');
 					$tag_closing = ($bits[0][0] === '/');
-					$tag_name    = strtolower(($bits[0][0] === '/' ? substr($bits[0], 1) : $bits[0]));
+					$tag_name    = ($bits[0][0] === '/' ? substr($bits[0], 1) : $bits[0]);
 
 					if(isset($this->bbcodes[$tag_name]))
 					{
