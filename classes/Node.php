@@ -19,16 +19,17 @@ abstract class Node
 
 	/**
 	 * Sets the nodes parent
-	 * @param Node $parent
+	 * @param Node_Container $parent
 	 */
 	public function set_parent(Node_Container $parent=null)
 	{
 		$this->parent = $parent;
 
-		if($parent instanceof Node_Container_Document)
+		if($parent instanceof Node_Container_Document) {
 			$this->root = $parent;
-		else
+		} else {
 			$this->root = $parent->root();
+		}
 	}
 
 	/**
