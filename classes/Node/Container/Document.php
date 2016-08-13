@@ -92,7 +92,7 @@ class Node_Container_Document extends Node_Container
 
 			new BBCode('bing', '<a href="https://www.bing.com/search?q=%content%">%content%</a>',
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
-			new BBCode('google', '<a href="https://www.google.com/webhp?q=%content%">%content%</a>',
+			new BBCode('google', '<a href="https://www.google.com/#q=%content%">%content%</a>',
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
 			new BBCode('wikipedia', '<a href="https://www.wikipedia.org/wiki/%content%">%content%</a>',
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
