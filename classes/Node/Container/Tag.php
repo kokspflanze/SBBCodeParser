@@ -14,9 +14,13 @@ class Node_Container_Tag extends Node_Container
 	 * Assoc array of attributes
 	 * @var array
 	 */
-	protected $attribs;
+	protected $attribs = array();
 
-
+    /**
+     * Node_Container_Tag constructor.
+     * @param string $tag
+     * @param array $attribs
+     */
 	public function __construct($tag, $attribs)
 	{
 		$this->tag     = $tag;

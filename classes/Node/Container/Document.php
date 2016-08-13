@@ -90,34 +90,35 @@ class Node_Container_Document extends Node_Container
 				height="44" alt="My status" /></a>',
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
 
-			new BBCode('bing', '<a href="http://www.bing.com/search?q=%content%">%content%</a>',
+			new BBCode('bing', '<a href="https://www.bing.com/search?q=%content%">%content%</a>',
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
-			new BBCode('google', '<a href="http://www.google.com/search?q=%content%">%content%</a>',
+			new BBCode('google', '<a href="https://www.google.com/webhp?q=%content%">%content%</a>',
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
-			new BBCode('wikipedia', '<a href="http://www.wikipedia.org/wiki/%content%">%content%</a>',
+			new BBCode('wikipedia', '<a href="https://www.wikipedia.org/wiki/%content%">%content%</a>',
 				BBCode::INLINE_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
 			new BBCode('youtube', function($content, $attribs)
 			{
-				if(substr($content, 0, 23) === 'http://www.youtube.com/')
-					$uri = $content;
-				else
-					$uri = 'http://www.youtube.com/v/' . $content;
+                if (preg_match('/http([s]?):\/\/(([w]{3}\.)?)youtube\.com\//s', $content)) {
+                    $uri = str_replace('http://', 'https://', $content);
+                } else {
+                    $uri = 'https://www.youtube.com/embed/' . $content;
+                }
 
 				return '<iframe width="480" height="390" src="' . $uri . '" frameborder="0"></iframe>';
 			}, BBCode::BLOCK_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),
 			new BBCode('vimeo', function($content, $attribs)
 			{
-				if(substr($content, 0, 24) === 'http://player.vimeo.com/')
+				if (substr($content, 0, 24) === 'http://player.vimeo.com/') {
 					$uri = $content;
-				else if(substr($content, 0, 17) === 'http://vimeo.com/'
+                } elseif(substr($content, 0, 17) === 'http://vimeo.com/'
 					|| substr($content, 0, 21) === 'http://www.vimeo.com/'
-					&& preg_match("/http:\/\/(?:www\.)?vimeo\.com\/([0-9]{4,10})/", $content, $matches))
-				{
+					&& preg_match("/http:\/\/(?:www\.)?vimeo\.com\/([0-9]{4,10})/", $content, $matches)
+                ) {
 					preg_match("/http:\/\/(?:www\.)?vimeo\.com\/([0-9]{4,10})/", $content, $matches);
 					$uri = 'http://player.vimeo.com/video/' . $matches[1] . '?title=0&amp;byline=0&amp;portrait=0';
-				}
-				else
+				} else {
 					$uri = 'http://player.vimeo.com/video/' . $content . '?title=0&amp;byline=0&amp;portrait=0';
+                }
 
 				return '<iframe src="' . $uri . '" width="400" height="225" frameborder="0"></iframe>';
 			}, BBCode::BLOCK_TAG, false, array(), array('text_node'), BBCode::AUTO_DETECT_EXCLUDE_ALL),

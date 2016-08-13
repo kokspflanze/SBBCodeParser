@@ -57,21 +57,22 @@ class BBCode
 	/**
 	 * Creates a new BBCode
 	 * @param string $tag                 Tag this BBCode is for
-	 * @param mixed  $handler             String or function, should return a string
+	 * @param string|callable $handler    String or function, should return a string
 	 * @param bool   $is_inline           If this tag is an inline tag or a block tag
 	 * @param array  $is_self_closing     If this tag is self closing, I.E. doesn't need [/tag]
 	 * @param array  $closing_tags        Tags which will close this tag
 	 * @param int    $accepted_children   Tags allowed as children of this BBCode. Can also include text_node
 	 * @param int    $auto_detect_exclude Which auto detections to exclude this BBCode from
 	 */
-	public function __construct($tag,
-								$handler,
-								$is_inline=BBCode::INLINE_TAG,
-								$is_self_closing=false,
-								$closing_tags=array(),
-								$accepted_children=array(),
-								$auto_detect_exclude=BBCode::AUTO_DETECT_EXCLUDE_NONE)
-	{
+	public function __construct(
+	    $tag,
+        $handler,
+        $is_inline = BBCode::INLINE_TAG,
+        $is_self_closing = false,
+        $closing_tags = array(),
+        $accepted_children = array(),
+        $auto_detect_exclude = BBCode::AUTO_DETECT_EXCLUDE_NONE
+    ) {
 		$this->tag                 = $tag;
 		$this->is_inline           = $is_inline;
 		$this->handler             = $handler;

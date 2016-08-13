@@ -22,10 +22,11 @@ SBBCodeParser is a simple BBCode parser.
 
 	$bbcode = new \SBBCodeParser\BBCode('youtube', function($content, $attribs)
 	{
-		if(substr($content, 0, 23) === 'http://www.youtube.com/')
-			$uri = $content;
-		else
-			$uri = 'http://www.youtube.com/v/' . $content;
+        if (preg_match('/http([s]?):\/\/(([w]{3}\.)?)youtube\.com\//s', $content)) {
+            $uri = str_replace('http://', 'https://', $content);
+        } else {
+            $uri = 'https://www.youtube.com/embed/' . $content;
+        }
 
 		return '';
 	}, \SBBCodeParser\BBCode::BLOCK_TAG, false, array(), array('text_node'), \SBBCodeParser\BBCode::AUTO_DETECT_EXCLUDE_ALL);
